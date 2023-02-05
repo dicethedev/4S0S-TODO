@@ -9,9 +9,11 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
+import { polygonMumbai } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const alchemyId = process.env.REACT_APP_POLYGON_ALCHEMY_ID;
 
@@ -28,7 +30,7 @@ const alchemyId = process.env.REACT_APP_POLYGON_ALCHEMY_ID;
 // );
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, polygonMumbai],
+  [polygonMumbai],
   [
     alchemyProvider({ apiKey: alchemyId }),
     publicProvider()
@@ -51,6 +53,7 @@ root.render(
   <React.StrictMode>
    <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains}>
+    <ToastContainer />
      <App />
     </RainbowKitProvider>
    </WagmiConfig>
